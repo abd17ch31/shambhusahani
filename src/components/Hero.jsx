@@ -47,9 +47,9 @@ export default function Hero() {
               mounted ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-md'
             }`}
           >
-            <span className="text-transparent [-webkit-text-stroke:2px_#111] md:[-webkit-text-stroke:3px_#111]">
-              Shambhu
-            </span>
+            <span className="text-transparent [-webkit-text-fill-color:transparent] [-webkit-text-stroke:2px_#111] md:[-webkit-text-stroke:3px_#111] [paint-order:stroke_fill]">
+  Shambhu
+</span>
             <span className="text-[#111]">
               Sahani
             </span>

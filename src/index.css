@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 html {
   /* Keeps the scroll smooth (good for clicking anchor links) */
   scroll-behavior: smooth;
@@ -9,3 +11,7 @@ html {
 }
 
 /* We completely removed the section snapping rules so it scrolls normally */
+
+body {
+  font-family: 'Inter', sans-serif;
+}

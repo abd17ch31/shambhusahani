@@ -3,7 +3,7 @@ export const contactConfig = {
   heading: "HAVE A PROJECT IN MIND?",
   description: "Together, we can create something clear and impactful. Let's collaborate to bring our ideas to life in a way that resonates with everyone.",
   ctaText: "Contact Me",
-  contactUrl: "#",
+  contactUrl: "tel:+919217902386",
   designer: {
     name: "Shambhu Sahani",
     url: "#"

@@ -46,7 +46,7 @@ export default function Contact() {
   return (
     <section 
       ref={sectionRef}
-      id="contact"
+      id="contact1"
       className="relative w-full py-16 md:py-24 px-4 md:px-8 bg-white flex justify-center overflow-hidden border-t border-gray-100"
     >
       {/* Outer Cloudy Atmospheric Container */}
@@ -93,17 +93,17 @@ export default function Contact() {
           </p>
 
           {/* 4. CTA Button */}
-          <a 
-            href={contactConfig.contactUrl}
-            className={`group mt-10 flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#111] px-8 text-[14px] font-medium text-white shadow-md transition-all duration-500 delay-[400ms] ${smoothEase} hover:-translate-y-1 hover:bg-[#333] hover:shadow-lg active:translate-y-0 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            {contactConfig.ctaText}
-            <span className="transition-transform duration-300 ease-out group-hover:-translate-y-[2px] group-hover:translate-x-[2px]">
-              ↗
-            </span>
-          </a>
+<a 
+  href={contactConfig.contactUrl} // <-- This now equals "tel:+919217902386"
+  className={`group mt-10 flex h-[48px] items-center justify-center gap-2 rounded-full bg-[#111] px-8 text-[14px] font-medium text-white shadow-md transition-all duration-500 delay-[400ms] ${smoothEase} hover:-translate-y-1 hover:bg-[#333] hover:shadow-lg active:translate-y-0 ${
+    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+  }`}
+>
+  {contactConfig.ctaText}
+  <span className="transition-transform duration-300 ease-out group-hover:-translate-y-[2px] group-hover:translate-x-[2px]">
+    ↗
+  </span>
+</a>
 
         </div>
 

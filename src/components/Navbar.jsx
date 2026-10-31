@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NAV_ITEMS = [
   { label: 'Work', count: '16', path: '/work' },
-  { label: 'Service', count: '5', path: '/#service' }, // <-- Updated to use hash
-  { label: 'Experience', count: '1.5y', path: '/#experience' }, // <-- Updated
-  { label: 'Contact', count: null, path: '/#contact' }, // <-- Updated
+  { label: 'Service', count: '5', path: '/#service' },
+  { label: 'Experience', count: '1.5y', path: '/#experience' },
+  { label: 'Contact', count: null, path: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -13,42 +13,36 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Custom click handler for smooth scrolling
   const handleNavClick = (e, path) => {
     e.preventDefault();
     
-    // Check if it's a hash link (e.g., "/#service")
     if (path.includes('#')) {
       const id = path.split('#')[1];
       
-      // If we are not on the homepage, go to homepage first
       if (location.pathname !== '/') {
+        // If on a different page (like /work), go to home first
         navigate('/');
-        // Wait for the page to render, then scroll
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       } else {
-        // If already on homepage, just scroll
+        // If already on the homepage, just scroll
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Normal route (like /work)
+      // Normal route
       navigate(path);
     }
     
     setIsMobileMenuOpen(false);
   };
 
-  // Helper to determine active state (handles both routes and hashes)
   const isActive = (path) => {
     if (path === '/work') return location.pathname === '/work';
-    // For hashes, we don't highlight them as "active" since they are just scroll targets
     return false; 
   };
 
@@ -95,8 +89,10 @@ export default function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          
+          {/* LET'S TALK BUTTON - Smooth scrolls to #contact */}
           <button
-            onClick={(e) => handleNavClick(e, '/#contact')}
+            onClick={(e) => handleNavClick(e, '/#contact1')}
             className="group flex h-[40px] sm:h-[42px] items-center justify-center gap-1.5 rounded-full bg-[#111] px-4 sm:px-6 text-[13px] sm:text-[14px] font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#333] hover:shadow-md active:translate-y-0"
           >
             Let's Talk
@@ -142,15 +138,6 @@ export default function Navbar() {
               )}
             </button>
           ))}
-          <div className="pt-2 sm:hidden">
-            <div className="flex items-center gap-2.5 rounded-full border border-gray-200 bg-white px-4 py-2 w-fit shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-              </span>
-              <span className="text-[13px] font-medium text-gray-600">Available for New Project</span>
-            </div>
-          </div>
         </nav>
       </div>
     </header>

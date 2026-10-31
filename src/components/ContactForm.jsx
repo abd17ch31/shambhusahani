@@ -58,6 +58,7 @@ export default function ContactForm() {
   return (
     <section 
       ref={sectionRef}
+      id="contact"
       className="relative w-full py-16 md:py-24 bg-white flex justify-center px-4 md:px-8 border-t border-gray-100 overflow-hidden"
     >
       <div className="relative w-full max-w-[800px] px-2 z-10">
