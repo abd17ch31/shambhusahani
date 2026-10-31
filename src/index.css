@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+html {
+  /* Keeps the scroll smooth (good for clicking anchor links) */
+  scroll-behavior: smooth;
+  
+  /* Still prevents anchor links from hiding under your sticky navbar */
+  scroll-padding-top: 80px; 
+}
+
+/* We completely removed the section snapping rules so it scrolls normally */
