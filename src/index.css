@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
 @import "tailwindcss";
 
 
@@ -14,4 +15,36 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
+}
+
+/* The more expressive display face is intentionally limited to the mobile
+   storytelling cards; desktop keeps the existing typography unchanged. */
+@media (max-width: 767px) {
+  .mobile-video-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .mobile-video-card {
+    min-height: 7rem;
+    background: var(--mobile-card-bg);
+    border-color: rgba(17, 24, 39, 0.55);
+    box-shadow: 0 8px 20px rgba(17, 24, 39, 0.06);
+  }
+
+  .mobile-video-media {
+    border-color: rgba(17, 24, 39, 0.25);
+    background: rgba(255, 255, 255, 0.38);
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
