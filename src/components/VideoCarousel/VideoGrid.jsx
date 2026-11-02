@@ -9,18 +9,26 @@ const VideoCard = ({ item, index }) => {
       
       {/* VIDEO SECTION (Left on mobile, Top on desktop) */}
       <div className="mobile-video-media relative w-1/3 md:w-full h-32 md:h-auto md:aspect-[4/5] border-r border-gray-900 md:border-none overflow-hidden shrink-0">
-        <video
-          src={item.video}
-          poster={item.poster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-105"
-        >
-          <img src={item.poster} alt={item.title} className="w-full h-full object-cover" />
-        </video>
+        {item.mediaType === 'image' ? (
+          <img
+            src={item.video}
+            alt={item.title}
+            className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-105"
+          />
+        ) : (
+          <video
+            src={item.video}
+            poster={item.poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-105"
+          >
+            <img src={item.poster} alt={item.title} className="w-full h-full object-cover" />
+          </video>
+        )}
         
         {/* Desktop Gradient Overlay for Video */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />

@@ -20,7 +20,7 @@ export default function Home() {
             / Motion & Video
           </h3>
           <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight">
-            Visual Storytelling
+            Tools Mastered
           </h2>
         </div>
         

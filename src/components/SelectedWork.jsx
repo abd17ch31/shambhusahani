@@ -1,11 +1,41 @@
-import { useState, useEffect, useRef } from 'react';
-import { projects } from '../data/projects';
-import { Link } from 'react-router-dom'; // Added for View All button
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import projectImage from '../assets/videos/projects/image.png';
+import projectOne from '../assets/videos/projects/project 1.mp4';
+import projectTwo from '../assets/videos/projects/project 2.mp4';
+import projectThree from '../assets/videos/projects/project 3.mp4';
+
+const workItems = [
+  { type: 'image', src: projectImage, title: 'Visual Identity', label: 'Brand exploration', layout: 'side' },
+  { type: 'video', src: projectOne, title: 'Product in Motion', label: 'Motion design', layout: 'top' },
+  { type: 'video', src: projectTwo, title: 'Colour & Form', label: 'Visual system', layout: 'bottom' },
+  { type: 'video', src: projectThree, title: 'A Moving Story', label: 'Creative direction', layout: 'side' },
+];
+
+function Media({ item }) {
+  const className = 'h-full w-full bg-[#ecebe6] object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 md:object-contain';
+
+  if (item.type === 'image') {
+    return <img src={item.src} alt={item.title} className={className} />;
+  }
+
+  return (
+    <video
+      src={item.src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-label={item.title}
+      className={className}
+    />
+  );
+}
 
 export default function SelectedWork() {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,156 +45,46 @@ export default function SelectedWork() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const filteredProjects = projects.filter((project) => {
-    if (activeFilter === 'all') return true;
-    return project.category === activeFilter;
-  });
-
-  const filters = [
-    { label: 'All', value: 'all' },
-    { label: 'Real Project', value: 'real-project' },
-    { label: 'Exploration', value: 'exploration' },
-  ];
-
-  const smoothEase = "ease-[cubic-bezier(0.16,1,0.3,1)]";
-
   return (
-    <section 
-      ref={sectionRef}
-      className="relative w-full py-16 md:py-24 bg-white flex justify-center px-4 md:px-8 border-t border-gray-100 overflow-hidden"
-    >
-      <div 
-        className={`relative w-full max-w-[1400px] px-2 md:px-12 transition-all duration-1000 ${smoothEase} ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
-        
-        {/* Background Watermark */}
-        <div className="absolute top-0 md:top-8 left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none z-0 overflow-hidden">
-          <h2 className="text-[22vw] md:text-[14vw] font-bold text-gray-50 uppercase tracking-tighter leading-none select-none opacity-50 whitespace-nowrap">
-            Portfolio
-          </h2>
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center mb-12 md:mb-16">
-          <h3 className="text-sm md:text-base font-semibold text-gray-900 tracking-widest uppercase">
-            / Selected Work
-          </h3>
-        </div>
-
-        {/* Filter Nav */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 mb-10 md:mb-12 border-b border-gray-100 pb-6">
-          <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 md:gap-6">
-            {filters.map((filter) => (
-              <button
-                key={filter.value}
-                onClick={() => setActiveFilter(filter.value)}
-                className={`text-[13px] md:text-sm font-medium transition-colors duration-300 ${
-                  activeFilter === filter.value
-                    ? 'text-black'
-                    : 'text-gray-400 hover:text-gray-600'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
+    <section ref={sectionRef} className="relative w-full overflow-hidden border-t border-gray-100 bg-[#f7f6f2] px-4 py-12 md:px-8 md:py-16">
+      <div className="mx-auto w-full max-w-[1440px]">
+        <div className={`mb-8 flex flex-col gap-6 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:mb-10 md:flex-row md:items-end md:justify-between ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">/ Selected Work</p>
+            <h2 className="max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-gray-950 md:text-6xl">Ideas with a pulse.</h2>
           </div>
-
-          <Link 
-            to="/work" 
-            className="group flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-[12px] font-medium text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md shrink-0"
-          >
-            View All Work
-            <span className="text-sm leading-none transition-transform duration-300 group-hover:-translate-y-[2px] group-hover:translate-x-[2px]">
-              ↗
-            </span>
+          <Link to="/work" className="group inline-flex w-fit items-center gap-3 border-b border-gray-900 pb-2 text-sm font-medium text-gray-900 transition-opacity hover:opacity-60">
+            View all work
+            <span className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">↗</span>
           </Link>
         </div>
 
-        {/* Grid */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {filteredProjects.map((project, index) => {
-            // Extract the numeric ID for the iframe embed
-            const projectId = project.behanceUrl.match(/gallery\/(\d+)/)?.[1];
-
-            return (
-              <div
-                key={project.id}
-                className={`group flex flex-col transition-all duration-700 ${smoothEase} ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-                style={{ transitionDelay: `${index * 150 + 300}ms` }}
-              >
-                
-                {/* Iframe Container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-100">
-                  {projectId ? (
-                    <iframe
-                      src={`https://www.behance.net/embed/project/${projectId}?ilo0=1`}
-                      title={project.title}
-                      loading="lazy"
-                      allowFullScreen
-                      className="absolute top-0 left-0 w-full h-full border-0"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-gray-400">Preview unavailable</div>
-                  )}
-
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                    <span className="inline-block rounded-full bg-white/95 backdrop-blur-sm px-3 py-1 text-[10px] font-bold tracking-wider text-black shadow-sm">
-                      {project.categoryLabel}
-                    </span>
-                  </div>
-
-                  {/* Hover Overlay to make the whole thing clickable */}
-                  <a 
-                    href={project.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 z-30 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/40 group-hover:opacity-100"
-                  >
-                    <span className="rounded-full bg-white text-black px-6 py-3 text-sm font-semibold tracking-wide shadow-xl translate-y-4 transition-transform duration-300 group-hover:translate-y-0">
-                      Open Project ↗
-                    </span>
-                  </a>
+        <div className="selected-work-grid grid grid-cols-1 gap-3 md:h-[520px] md:grid-cols-12 md:grid-rows-2 md:gap-4 lg:h-[600px]">
+          {workItems.map((item, index) => (
+            <article
+              key={item.title}
+              className={`selected-work-card selected-work-card-${index} group relative min-h-[16rem] overflow-hidden rounded-[1.25rem] bg-gray-200 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:min-h-0 md:h-full ${item.layout === 'side' ? 'md:row-span-2' : ''} ${index === 0 ? 'md:col-span-3' : index === 1 ? 'md:col-span-6 md:col-start-4 md:row-start-1' : index === 2 ? 'md:col-span-6 md:col-start-4 md:row-start-2' : 'md:col-span-3 md:col-start-10 md:row-start-1'} ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              style={{ transitionDelay: `${index * 120 + 150}ms` }}
+            >
+              <Media item={item} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white md:p-6">
+                <div>
+                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/65">{item.label}</p>
+                  <h3 className="text-xl font-medium tracking-[-0.02em] md:text-2xl">{item.title}</h3>
                 </div>
-
-                {/* Text Content */}
-                <div className="mt-5 flex flex-col">
-                  <h4 className="text-lg md:text-xl font-semibold text-gray-900 transition-colors duration-300">
-                    {project.title}
-                  </h4>
-                  <p className="mt-1 text-sm text-gray-500">
-                    {project.description}
-                  </p>
-                  
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.metadata.map((meta, i) => (
-                      <span 
-                        key={i} 
-                        className="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-medium text-gray-500"
-                      >
-                        {meta}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <span className="flex h-9 w-9 shrink-0 -translate-x-2 items-center justify-center rounded-full border border-white/40 text-lg opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">↗</span>
               </div>
-            );
-          })}
+            </article>
+          ))}
         </div>
-
       </div>
     </section>
   );
