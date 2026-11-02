@@ -11,6 +11,7 @@ const VideoCard = ({ item, index }) => {
       <div className="mobile-video-media relative w-1/3 md:w-full h-32 md:h-auto md:aspect-[4/5] border-r border-gray-900 md:border-none overflow-hidden shrink-0">
         {item.mediaType === 'image' ? (
           <img
+            loading="lazy"
             src={item.video}
             alt={item.title}
             className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-105"
@@ -23,10 +24,10 @@ const VideoCard = ({ item, index }) => {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-105"
           >
-            <img src={item.poster} alt={item.title} className="w-full h-full object-cover" />
+            <img loading="lazy" src={item.poster} alt={item.title} className="w-full h-full object-cover" />
           </video>
         )}
         

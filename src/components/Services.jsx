@@ -86,6 +86,7 @@ export default function Services() {
       >
         {services.map((service) => (
           <img
+            loading="lazy"
             key={service.id}
             src={service.cursorImage}
             alt=""

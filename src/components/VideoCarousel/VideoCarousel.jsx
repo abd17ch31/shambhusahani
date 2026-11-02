@@ -40,11 +40,11 @@ const VideoCard = ({ item, index, isActive }) => {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         className="w-full h-full object-cover"
       >
         {/* Fallback if video format isn't supported */}
-        <img src={item.poster} alt={item.title} className="w-full h-full object-cover" />
+        <img loading="lazy" src={item.poster} alt={item.title} className="w-full h-full object-cover" />
       </video>
 
       {/* Gradient Overlay for Text Readability */}

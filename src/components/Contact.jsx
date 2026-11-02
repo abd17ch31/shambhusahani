@@ -120,7 +120,7 @@ export default function Contact() {
             className="group flex h-[44px] items-center gap-3 rounded-full bg-[#151515] pl-1.5 pr-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
             <div className="h-8 w-8 overflow-hidden rounded-full border border-white/20">
-              <img 
+              <img loading="lazy" 
                 src={heroImage} 
                 alt={contactConfig.designer.name}
                 className="h-full w-full object-cover object-top grayscale"

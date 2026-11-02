@@ -16,7 +16,7 @@ function Media({ item }) {
   const className = 'h-full w-full bg-[#ecebe6] object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 md:object-contain';
 
   if (item.type === 'image') {
-    return <img src={item.src} alt={item.title} className={className} />;
+    return <img loading="lazy" src={item.src} alt={item.title} className={className} />;
   }
 
   return (
@@ -26,7 +26,7 @@ function Media({ item }) {
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
       aria-label={item.title}
       className={className}
     />

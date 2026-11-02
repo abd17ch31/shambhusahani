@@ -59,7 +59,7 @@ export default function Hero() {
         {/* 2. Portrait Image - FULL WIDTH ON MOBILE */}
         {/* Changed max-w to max-w-none for mobile, and w-full on the img tag */}
         <div className="relative md:absolute bottom-0 md:left-1/2 md:-translate-x-1/2 w-full max-w-none md:max-w-[700px] h-[480px] sm:h-[560px] md:h-[75%] flex justify-center items-end z-20 pointer-events-none mt-2 md:mt-0">
-          <img 
+          <img loading="lazy" 
             src={heroImage} 
             alt="Shambhu Sahani" 
             className={`w-full md:w-auto h-full object-contain object-bottom grayscale transition-all duration-[2000ms] delay-[400ms] ${smoothEase} ${
